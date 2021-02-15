@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """ Flask Application """
 from models import storage
-from api.v1.views import app_views
+from api.v1.views.index import *
+from api.v1.views.cities import *
+from api.v1.views.states import *
+from api.v1.views.places import *
+from api.v1.views.amenities import *
+from api.v1.views.users import *
+from api.v1.views.places_reviews import *
 from os import environ
 from flask import Flask, render_template, make_response, jsonify
 from flask_cors import CORS
@@ -11,7 +17,7 @@ from flasgger.utils import swag_from
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}}) 
 
 
 @app.teardown_appcontext
@@ -46,4 +52,4 @@ if __name__ == "__main__":
         host = '0.0.0.0'
     if not port:
         port = '5000'
-    app.run(host=host, port=port, threaded=True)
+    app.run(host=host, port=port, threaded=True, debug=True)
