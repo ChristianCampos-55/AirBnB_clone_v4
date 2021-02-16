@@ -1,9 +1,9 @@
 $(document).ready(init);
 
 const HOST = '0.0.0.0';
+const amenityObj = {};
 
 function init () {
-  const amenityObj = {};
   $('.amenities .popover input').change(function () {
     if ($(this).is(':checked')) {
       amenityObj[$(this).attr('data-name')] = $(this).attr('data-id');
